@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Kreait\Firebase\Factory;
 // use Kreait\Firebase\Database;
 use Kreait\Firebase\Contract\Database;
 use Illuminate\Http\Request;
@@ -57,6 +56,13 @@ class BookController extends Controller
     {
         // Mengambil semua data buku dari Firebase Database
         $books = $this->database->getReference('books')->getValue();
+
+        // Jika data kosong, kembalikan respons dengan data kosong
+        if (empty($books)) {
+            return response()->json([
+                'data' => null,
+            ], 200);
+        }
 
         // Pastikan data tidak mengandung entri null
         $formattedBooks = [];
