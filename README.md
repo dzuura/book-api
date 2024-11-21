@@ -1,66 +1,169 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Book API Documentation
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Overview
 
-## About Laravel
+The Book Management API provides a set of endpoints to manage books in a system. It allows users to create, retrieve, update, and delete book records efficiently. 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Base URL
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+The base URL for the API is: https://book-api-dzuuras-projects.vercel.app/api/api/
+<br>
+Or if you are using localhost: [http:localhost:8000/api/](http:localhost:8000/api/)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+## Endpoints
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 1. Create Book
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **Endpoint:** `/books`
+- **Method:** `POST`
+- **Description:** Create a new book.
+- **Response:**
+  - **Status Code:** 201 Created
+  - **Response Body:** JSON object of the created book.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+#### Example Request
+```json
+{
+  "title": "5 Minute to Learn Go",
+  "author": "Sundar Pichai",
+  "year": "2023-10-25"
+}
+```
 
-## Laravel Sponsors
+#### Example Response
+```json
+{
+  "id": 1,
+  "title": "5 Minute to Learn Go",
+  "author": "Sundar Pichai",
+  "year": "2023-10-25"
+}
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 2. Read Book
 
-### Premium Partners
+- **Endpoint:** `/books`
+- **Method:** `GET`
+- **Description:** Retrieve a list of all books.
+- **Response:**
+  - **Status Code:** 200
+  - **Response Body:** JSON array of books.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+#### Example Request
+```curl
+'https://book-api-dzuuras-projects.vercel.app/api/api/books'
+```
 
-## Contributing
+#### Example Response
+```json
+{
+  "id": 1,
+  "title": "Book Title",
+  "author": "Author Name",
+  "year": 2023
+},
+{
+  "id": 2,
+  "title": "Another Book",
+  "author": "Another Author",
+  "year": 2022
+}
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 3. Read Single Book
 
-## Code of Conduct
+- **Endpoint:** `/books/{id}`
+- **Method:** `GET`
+- **Description:** Retrieve a specific of books.
+- **Response:**
+  - **Status Code:** 200
+  - **Response Body:** JSON object of book.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+#### Example Request
+```curl
+curl --location --request GET 'https://book-api-dzuuras-projects.vercel.app/api/api/books/1'
+```
 
-## Security Vulnerabilities
+#### Example Response
+```json
+{
+  "id": 1,
+  "title": "5 Minute to Learn Go",
+  "author": "Sundar Pichai",
+  "year": "2023-10-25"
+}
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 4. Update Book
 
-## License
+- **Endpoint:** `/books/{id}`
+- **Method:** `PUT`
+- **Description:** Update an existing book by ID.
+- **Response:**
+  - **Status Code:** 200
+  - **Response Body:** JSON object of the updated book.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+#### Example Request
+```json
+{
+  "title": "Updated Book Title",
+  "author": "Updated Author Name",
+  "year": 2024
+}
+```
+
+#### Example Response
+```json
+{
+  "id": 1,
+  "title": "Updated Book Title",
+  "author": "Updated Author Name",
+  "year": 2024
+}
+```
+
+### 5. Delete Book
+
+- **Endpoint:** `/books/{id}`
+- **Method:** `DELETE`
+- **Description:** Delete a book by ID.
+- **Response:**
+  - **Status Code:** 200
+  - **Response Body:** Confirmation message.
+
+#### Example Request
+```curl
+curl --location --request DELETE 'https://book-api-dzuuras-projects.vercel.app/api/api/books/1'
+```
+
+#### Example Response
+```json
+{
+  "message": "Book deleted successfully."
+}
+```
+
+### 6. Not Found Book
+
+- **Endpoint:** `/books/{id}`
+- **Method:** `GET`
+- **Description:** Attempt to retrieve a book that does not exist.
+- **Response:**
+  - **Status Code:** 404 Not Found
+  - **Response Body:** Error message with required fields.
+
+#### Example Request
+```curl
+curl --location --request GET 'https://book-api-dzuuras-projects.vercel.app/api/api/books/8'
+```
+
+#### Example Response
+```json
+{
+  "error": {
+    "message": "Book not found.",
+    "status": 404
+  }
+}
+```
