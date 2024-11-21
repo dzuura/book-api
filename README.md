@@ -167,3 +167,6 @@ curl --location --request GET 'https://book-api-dzuuras-projects.vercel.app/api/
   }
 }
 ```
+
+## Conclusion
+This API provides a simple interface for managing books. For any issues or contributions, please feel free to open an issue or pull request in the repository.
